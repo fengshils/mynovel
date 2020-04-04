@@ -100,7 +100,7 @@
 
                         {foreach $last_updates as $v}
                         <li class="list-group-item ">
-                            <a href="{:url('Novel/index',['id'=>$c.id])}">{$v.name}</a>
+                            <a href="{:url('Novel/index',['id'=>$v.id])}">{$v.name}</a>
                             <span class="text-right" style="font-size: .8125rem;color: gray; border-top: -2rem;">{$v.author}</span>
                             <span class="text-right" style="font-size: .8125rem;color: gray; border-top: -2rem;">{$v.update_time | date='Y-m-d H:i'}</span>
                         </li>
