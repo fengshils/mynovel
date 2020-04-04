@@ -34,8 +34,8 @@ class Novel extends Common
     public function chapter($id)
     {
         $chapter = Db::table('chapter')->find($id);
-        if(!$this->sys_set['site_save_type'] == "mysql"){
-            $chapter['content'] = file_get_contents(__DIR__."/../../../Novel/".$chapter['n_id']."/".$chapter['id'].".txt");
+        if($this->sys_set['site_save_type'] == "txt"){
+            $chapter['content'] = file_get_contents($this->sys_set['site_save_path']."/".$chapter['n_id']."/".$chapter['id'].".txt");
         }
         $d_hits = Db::table("novel")->find($chapter["n_id"])["d_hits"]+1;
         Db::table("novel")->where("id",$chapter["n_id"])->update(['d_hits'=>$d_hits]);

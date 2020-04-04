@@ -33,7 +33,7 @@
 
         {foreach $last_chapters as $v}
         <div class="col-sm-3" style="border: gray solid 1px">
-            <a href="{:url('Novel/chapter',['id'=>$last_update.id])}">{$v['name']}</a>
+            <a href="{:url('Novel/chapter',['id'=>$v.id])}">{$v['name']}</a>
         </div>
         {/foreach}
 
@@ -43,7 +43,7 @@
 
         {foreach $chapters as $v}
         <div class="col-sm-3" style="border: gray solid 1px">
-            <a href="{:url('Novel/chapter',['id'=>$last_update.id])}">{$v['name']}</a>
+            <a href="{:url('Novel/chapter',['id'=>$v.id])}">{$v['name']}</a>
         </div>
         {/foreach}
 

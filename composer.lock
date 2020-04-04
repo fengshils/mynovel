@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "404c43940178564630c71123c95f8228",
+    "content-hash": "b351debdecd9fb6d5f9add216fe7bd5e",
     "packages": [
         {
             "name": "league/flysystem",
@@ -497,58 +497,6 @@
                 "thinkphp"
             ],
             "time": "2020-01-13T05:48:05+00:00"
-        },
-        {
-            "name": "topthink/think-captcha",
-            "version": "v3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/top-think/think-captcha.git",
-                "reference": "66bde1635a5b4f45554a88857bc355aa17eb2180"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/top-think/think-captcha/zipball/66bde1635a5b4f45554a88857bc355aa17eb2180",
-                "reference": "66bde1635a5b4f45554a88857bc355aa17eb2180",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "require": {
-                "topthink/framework": "^6.0.0"
-            },
-            "type": "library",
-            "extra": {
-                "think": {
-                    "services": [
-                        "think\\captcha\\CaptchaService"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "think\\captcha\\": "src/"
-                },
-                "files": [
-                    "src/helper.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "yunwuxin",
-                    "email": "448901948@qq.com"
-                }
-            ],
-            "description": "captcha package for thinkphp",
-            "time": "2019-04-17T09:17:34+00:00"
         },
         {
             "name": "topthink/think-helper",

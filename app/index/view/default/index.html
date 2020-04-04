@@ -11,7 +11,7 @@
                     <div class="col-sm-3 ">
                         <a href="{:url('Novel/index',['id'=>$c.id])}"><img src="{$c.cover}" alt="{$c.name}" style="width: 120px;height: 160px" onerror="javascript:this.src='/static/images/no_img.jpg';"></a>
                         <div>
-                            <span><strong>{$c.name}</strong></span>
+                            <a href="{:url('Novel/index',['id'=>$c.id])}"><span><strong>{$c.name}</strong></span></a>
                             <p><span style="font-size: .8125rem;color: gray; border-top: -2rem;">{$c.author}</span></p>
                         </div>
                     </div>

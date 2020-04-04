@@ -47,9 +47,15 @@
     <div class="layui-form-item">
         <label class="layui-form-label">小说章节存储</label>
         <div class="layui-input-block">
-            <input type="text" name="site_save_type" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="mysql">
-            <p style="color: red">mysql或者text</p>
-
+            <input type="text" name="site_save_type" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="{$value['site_save_type']}">
+            <p style="color: red">mysql或者txt</p>
+        </div>
+    </div>
+        <div class="layui-form-item">
+        <label class="layui-form-label">小说章节存储路径</label>
+        <div class="layui-input-block">
+            <input type="text" name="site_save_path" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="{$value['site_save_path']}">
+            <p style="color: red">当存储路径为txt时生效</p>
         </div>
     </div>
     <div class="layui-form-item">
