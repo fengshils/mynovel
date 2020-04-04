@@ -71,7 +71,7 @@ class AdminUser
         if (Request::method() == 'POST') {
             $id = Request::param('id');
             // $delete = Db::table('shop_goods')->where('id',$id)->delete();
-            $delete = Db::table('category')->where('id', $id)->update(['status' => 2]);
+            $delete = Db::table('admin_users')->where('id', $id)->update(['status' => 2]);
             if ($delete) {
                 echo json_encode(['code' => 0, 'msg' => '删除成功']);
             } else {
