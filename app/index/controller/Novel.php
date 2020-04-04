@@ -13,8 +13,8 @@ class Novel extends Common
     public function index($id)
     {
         $novel = Db::table("novel")->find($id);
-        $last_update = Db::table("chapter")->where('n_id',$novel["id"])->order("update_time","desc")->find();
-        $last_chapters = Db::table('chapter')->where("n_id", $novel['id'])->order("update_time","desc")->limit(12)->select();
+        $last_update = Db::table("chapter")->where('n_id',$novel["id"])->order("id","desc")->find();
+        $last_chapters = Db::table('chapter')->where("n_id", $novel['id'])->order("id","desc")->limit(12)->select();
         $chapters = Db::table('chapter')->where("n_id", $novel['id'])->select();
         View::assign([
             "novel"=>$novel,
