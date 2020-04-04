@@ -1,0 +1,123 @@
+{extend name="base" /}
+
+{block name="content"}
+<div>
+    <span class="layui-breadcrumb">
+  <a href="">首页</a>
+  <a><cite>分类管理</cite></a>
+</span>
+</div>
+<hr>
+<div class="layui-row">
+    <div class="layui-col-md9">
+        <h4><span>商品列表</span></h4>
+    </div>
+    <div class="layui-col-md3">
+        <!--<button class="layui-btn layui-btn-xs" style="text-align: right;" onclick="add()">添加</button>-->
+    </div>
+</div>
+<div>
+    <form class="layui-form"  action="/admin/novel/search">
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">名称</label>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" name="name" value="">
+            </div>
+            <div class="layui-input-inline">
+                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+<div>
+    <table class="layui-table">
+        <colgroup>
+
+        </colgroup>
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>名称</th>
+            <th>作者</th>
+            <th>分类</th>
+            <th>字数</th>
+            <th>更新时间</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {volist name="novel_lists" id="novel"}
+        <tr>
+            <td>{$novel.id}</td>
+            <td>{$novel.name}</td>
+            <td>{$novel.author}</td>
+            <td>{$novel.category}</td>
+            <td>{$novel.length}</td>
+            <td>{$novel.create_time}</td>
+            <td>{if $novel['status']==0}开启{elseif $novel['status']==1}关闭{/if}</td>
+            <td>
+                <a href="/admin/novel/edit?id={$novel.id}"><button class="layui-btn-sm layui-btn" >编辑</button></a>
+                <a href="/admin/chapter?n_id={$novel.id}"><button class="layui-btn-sm layui-btn" >章节目录</button></a>
+                <button class="layui-btn-sm layui-btn layui-btn-danger"  onclick="del({$novel.id})">删除</button>
+            </td>
+        </tr>
+        {/volist}
+
+        </tbody>
+    </table>
+    {$novel_lists|raw}
+</div>
+
+<script type="text/javascript">
+    function edit(id){
+        layer.open({
+            type: 2,
+            title: '编辑',
+            shade: 0.3,
+            area: ['1024px', '720px'],
+            content: '/admin/novel/edit?id='+id
+        });
+    }
+    function add(){
+        layer.open({
+            type: 2,
+            title: '添加',
+            shade: 0.3,
+            area: ['480px', '440px'],
+            content: '/admin/category/add'
+        });
+    }
+    function del(id){
+        layer.confirm('确定要删除吗？', {
+            icon:3,
+            btn: ['确定','取消']
+        }, function(){
+            $.post('/admin/novel/del',{'id':id},function(res){
+                if(res.code>0){
+                    layer.alert(res.msg,{icon:2});
+                }else{
+                    layer.msg(res.msg);
+                    setTimeout(function(){window.location.reload();},1000);
+                }
+            },'json');
+        });
+    }
+</script>
+
+<script>
+    //Demo
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+
+            return true;
+        });
+    });
+</script>
+{/block}

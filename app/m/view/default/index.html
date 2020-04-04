@@ -1,0 +1,80 @@
+{include file="default/head"}
+    <div class="container">
+        <div class="row">
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    {foreach $rotation_charts as $value}
+                    <div class="carousel-item {if $value['id'] eq 1}active{/if}"  >
+                        <a href="{$value.link}"><img  class="d-block w-100" src="{$value.img_url}" alt="{$value.name}" onerror="javascript:this.src='/static/images/no_img.jpg';"></a>
+                    </div>
+                    {/foreach}
+                </div>
+
+              </div>
+        </div>
+    </div>
+    <div>
+        <div class="d-flex bd-highlight shadow-sm p-1 mb-0 bg-white rounded">
+            <div class="p-2 flex-grow-1 bd-highlight">经典好书</div>
+          
+            <!--<div class="p-2 bd-highlight text-black-50" style="font-size: small;">更多</div>-->
+        </div>
+        <div class="d-flex justify-content-around">
+            {foreach $recommend1_novel_list as $v}
+            <div class=" p-2 mb-2" >
+                <a href="/m/novel/{$v.id}.html"><img src="{$v.cover}" class="card-img-top" alt="{$v.name}" onerror="javascript:this.src='/static/images/no_img.jpg';"></a>
+                <a href="/m/novel/{$v.id}.html"><span style="font-size: .8125rem;">{$v.name}</span></a>
+                <br>
+                <span style="font-size: .8125rem;color: gray; border-top: -2rem;">{$v.author}</span>
+              </div>
+            {/foreach}
+
+        </div>
+    </div>
+    <div>
+        <div class="d-flex bd-highlight shadow-sm p-1 mb-0 bg-white rounded">
+            <div class="p-2 flex-grow-1 bd-highlight">编辑推荐</div>
+          
+            <!--<div class="p-2 bd-highlight text-black-50" style="font-size: small;">更多</div>-->
+        </div>
+        <div class="d-flex justify-content-around">
+            {foreach $recommend1_novel_list as $v}
+            <div class=" p-2 mb-2" >
+                <a href="/m/novel/{$v.id}.html"><img src="{$v.cover}" class="card-img-top" alt="{$v.name}" onerror="javascript:this.src='/static/images/no_img.jpg';" ></a>
+                <a href="/m/novel/{$v.id}.html"><span style="font-size: .8125rem;">{$v.name}</span></a>
+                <br>
+                <span style="font-size: .8125rem;color: gray; border-top: -2rem;">{$v.author}</span>
+            </div>
+            {/foreach}
+        </div>
+    </div>
+    <div>
+        <!--<div class="d-flex bd-highlight">-->
+            <!--<div class="p-2 flex-grow-1 bd-highlight">玄幻小说</div>-->
+          <!---->
+            <!--<div class="p-2 bd-highlight text-black-50" style="font-size: small;">更多</div>-->
+        <!--</div>-->
+    <!--</div>-->
+        <div>
+            <div class="d-flex bd-highlight shadow-sm p-1 mb-0 bg-white rounded">
+                <div class="p-2 flex-grow-1 bd-highlight">最近更新</div>
+
+                <!--<div class="p-2 bd-highlight text-black-50" style="font-size: small;">更多</div>-->
+            </div>
+            <div class="pt-2" style="line-height: 5px;">
+                <ul class="list-group list-group-flush">
+                {foreach $last_update as $v}
+
+                    <li class="list-group-item ">
+                        <a href="/m/novel/{$v.id}.html">{$v.name}</a>
+                        <span style="font-size: .8125rem;color: gray; border-top: -2rem;">{$v.author}</span>
+                        <span style="font-size: .8125rem;color: gray; border-top: -2rem;">{$v.update_time | date='Y-m-d '}</span>
+                    </li>
+
+                {/foreach}
+                </ul>
+
+
+            </div>
+        </div>
+{include file="default/footer"}

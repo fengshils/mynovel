@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
+    <script type="text/javascript" src="/static/admin/layui/layui.js"></script>
+</head>
+<body style="padding:10px;">
+<form class="layui-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label">名称</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" name="name" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">链接</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" name="link" value="">
+        </div>
+    </div>
+    <div class="layui-form-item" >
+        <label class="layui-form-label">图片</label>
+        <input type="hidden" id="img_url" name="img_url" value="">
+        <div class="layui-upload" style="margin-left: 40px">
+            <button type="button" class="layui-btn" id="test1">上传图片</button>
+            <div class="layui-upload-list">
+                <img class="layui-upload-img" id="demo1" src="" style="margin-left: 20px" height="100px" width="200px">
+                <p id="demoText"></p>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="layui-form-item">
+    <div class="layui-input-block">
+        <button class="layui-btn" onclick="save()">保存</button>
+    </div>
+</div>
+<script type="text/javascript">
+    layui.use(['layer','form'],function(){
+        form = layui.form;
+        layer = layui.layer;
+        $ = layui.jquery;
+    });
+    function save(){
+        $.post('/admin/rotation_chart/add',$('form').serialize(),function(res){
+            if(res.code>0){
+                layer.alert(res.msg,{icon:2});
+            }else{
+                layer.msg(res.msg);
+                setTimeout(function(){parent.window.location.reload();},1000);
+            }
+        },'json');
+    }
+</script>
+<script>
+    layui.use('upload', function(){
+        var upload = layui.upload;
+
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '#test1' //绑定元素
+            ,url: '/admin/index/upload/' //上传接口
+            ,done: function(res){
+                //上传完毕回调
+                console.log(res);
+                var a = document.getElementById('img_url');
+                a.value=res.data.src;
+                document.getElementById("demo1").src =res.data.src;
+                document.getElementById("demo1").height =100;
+                document.getElementById("demo1").width =50;
+            }
+            ,error: function(){
+                //请求异常回调
+            }
+        });
+    });
+</script>
+</body>
+</html>

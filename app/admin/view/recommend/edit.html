@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
+    <script type="text/javascript" src="/static/admin/layui/layui.js"></script>
+</head>
+<body style="padding:10px;">
+<form class="layui-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label">名称</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" name="name" value="{$cat.name}">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">小说</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" name="n_id" value="{$cat.n_id}">
+            <p style="color: red;">{$cat.desc}</p>
+        </div>
+    </div>
+    <div class="layui-form-item">
+
+        <div class="layui-input-block">
+            <input type="hidden"  class="layui-input" name="desc" value="此处填写小说id并以英文分号隔离，或者复制此处 ;   最多可以设置五本，超过不展示">
+            <p style="color: red;"></p>
+        </div>
+    </div>
+</form>
+<div class="layui-form-item">
+    <div class="layui-input-block">
+        <button class="layui-btn" onclick="save()">保存</button>
+    </div>
+</div>
+<script type="text/javascript">
+    layui.use(['layer','form'],function(){
+        form = layui.form;
+        layer = layui.layer;
+        $ = layui.jquery;
+    });
+    function save(){
+        $.post('/admin/recommend/edit?id={$cat.id}',$('form').serialize(),function(res){
+            if(res.code>0){
+                layer.alert(res.msg,{icon:2});
+            }else{
+                layer.msg(res.msg);
+                setTimeout(function(){parent.window.location.reload();},1000);
+            }
+        },'json');
+    }
+</script>
+</body>
+</html>

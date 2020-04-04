@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>摸鱼小说管理系统</title>
+    <link rel="stylesheet" href="/static/admin/layui/css/layui.css">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="/static/admin/bootstrap.min.css"  crossorigin="anonymous">
+
+    <script src="/static/admin/layui/layui.js"></script>
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">摸鱼小说管理系统</div>
+
+        <ul class="layui-nav layui-layout-right">
+            <!--<li class="layui-nav-item">-->
+                <!--<a href="javascript:;">-->
+                    <!--<img src="http://t.cn/RCzsdCq" class="layui-nav-img">-->
+                    <!--贤心-->
+                <!--</a>-->
+                <!--<dl class="layui-nav-child">-->
+                    <!--<dd><a href="">基本资料</a></dd>-->
+                    <!--<dd><a href="">安全设置</a></dd>-->
+                <!--</dl>-->
+            <!--</li>-->
+            {if session('Admin_username')}
+            <li class="layui-nav-item"><a href="/admin/login/logout">退了</a></li>
+            {/if}
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+
+                <li class="layui-nav-item"><a href="/admin/category/index">分类管理</a></li>
+                <li class="layui-nav-item"><a href="/admin/novel/index">小说管理</a></li>
+                <li class="layui-nav-item"><a href="/admin/system/index">系统管理</a></li>
+                <li class="layui-nav-item"><a href="/admin/front_user/index">用户管理</a></li>
+                <li class="layui-nav-item"><a href="/admin/admin_user/index">后台用户</a></li>
+                <li class="layui-nav-item"><a href="/admin/front_user/index">用户管理</a></li>
+                <li class="layui-nav-item"><a href="/admin/rotation_chart/index">轮播图管理</a></li>
+                <li class="layui-nav-item"><a href="/admin/recommend/index">推荐管理</a></li>
+                <li class="layui-nav-item"><a href="#">广告位管理</a></li>
+                <li class="layui-nav-item"><a href="#">书单管理</a></li>
+                <li class="layui-nav-item"><a href="#">评论管理</a></li>
+                <li class="layui-nav-item"><a href="/admin/friendship_link/index">友情链接</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">{block name="content"}内容主体区域{/block}</div>
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © layui.com - 底部固定区域
+    </div>
+</div>
+
+<script>
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var element = layui.element;
+
+    });
+    layui.use(['element','layer','laypage','layedit'], function(){
+        var element = layui.element;
+        var laypage = layui.laypage;
+        $ = layui.jquery;
+        layer = layui.layer;
+        resetMenuHeight();
+    });
+    // 重新设置菜单容器高度
+    function resetMenuHeight(){
+        var height = document.documentElement.clientHeight - 50;
+        $('#menu').height(height);
+    }
+</script>
+<script>
+    function logout(){
+        var username=document.getElementsByName('username')[0].value;
+        var password=document.getElementsByName('password')[0].value;
+        console.log(username, password);
+        $.post("login",
+            {
+                username: username,
+                password: password
+            },
+            function(data,status){
+                console.log(data);
+                if(data.code ===0 ){
+                    alert(data.message)
+                    window.location.href = '/admin/index'
+                }else{
+                    alert(data.message)
+                }
+            });
+    }
+
+</script>
+</body>
+</html>

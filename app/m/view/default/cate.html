@@ -1,0 +1,26 @@
+{include file="default/head"}
+
+    {foreach $cats as $v}
+        <div class="d-flex bd-highlight shadow-sm p-1 mb-0 bg-white rounded">
+            <div class="p-2 flex-grow-1 bd-highlight"><a href="">{$v.name}</a></div>
+
+
+        </div>
+        <div class="pt-2" style="line-height: 5px;">
+            <ul class="list-group list-group-flush">
+
+                {if $v.lists}
+                {foreach $v.lists as $value}
+                <li class="list-group-item ">
+                    <a href="/m/novel_list/list/{$value.id}">{$value.name}</a>
+
+                </li>
+                {/foreach}
+                {/if}
+
+            </ul>
+
+
+        </div>
+    {/foreach}
+    {include file="default/footer"}

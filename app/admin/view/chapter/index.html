@@ -1,0 +1,28 @@
+{extend name="base" /}
+
+{block name="content"}
+<div>
+    <span class="layui-breadcrumb">
+  <a href="">首页</a>
+  <a><cite>分类管理</cite></a>
+</span>
+</div>
+<hr>
+<div class="layui-row">
+    <div class="layui-col-md9">
+        <h4><span>{$novel.name}章节列表</span></h4>
+    </div>
+    <div class="layui-col-md3">
+        <!--<button class="layui-btn layui-btn-xs" style="text-align: right;" onclick="add()">添加</button>-->
+    </div>
+</div>
+
+<div style="display: flex;flex-direction: row;flex-wrap: wrap; ">
+    {foreach novel_chapters as $k=>$v}
+    <li style="border: #1E9FFF solid 1px; margin: 10px 10px;"><a href="/admin/chapter/edit?id={$v.id}">{$v.name}</a></li>
+    {/foreach}
+</div>
+
+
+
+{/block}

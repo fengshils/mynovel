@@ -1,0 +1,52 @@
+{include file="default/head"}
+<div class="container">
+            {if $Request.session.msg}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {$Request.session.msg}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {/if}
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <img src="{$novel.cover}" alt="{$novel.name}" class="p-2" style="height: 200px;width: 160px" onerror="javascript:this.src='/static/images/no_img.jpg';">
+                </div>
+                <div class="col-sm-8">
+                    <h5 class="pt-10"><strong>{$novel.name}</strong></h5>
+                    <p><span>作者：{$novel.author}</span></p>
+                    <span>最近更新：<a href="{:url('Novel/chapter',['id'=>$last_update.id])}">{$last_update.name}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{$last_update.update_time| date='Y-m-d H:i'}</span></span>
+                    <p>{$novel.desc}</p>
+                                      <div class="text-left">
+                      <a href="{:url('BookShelf/add',['n_id'=>$novel['id'], 'chapter_id'=>$chapters[0]['id']])}"><button class="btn btn-sm btn-info">添加书架</button></a>
+                      <a href="{:url('novel/chapter',['id'=>$chapters[0]['id']])}"><button class="btn btn-sm btn-danger" >开始阅读</button></a>
+                  </div>
+                </div>
+            </div>
+
+
+    </div>
+<div class="container">
+    <p>最近更新</p>
+    <div class="row">
+
+        {foreach $last_chapters as $v}
+        <div class="col-sm-3" style="border: gray solid 1px">
+            <a href="{:url('Novel/chapter',['id'=>$last_update.id])}">{$v['name']}</a>
+        </div>
+        {/foreach}
+
+    </div>
+    <p>章节目录</p>
+    <div class="row">
+
+        {foreach $chapters as $v}
+        <div class="col-sm-3" style="border: gray solid 1px">
+            <a href="{:url('Novel/chapter',['id'=>$last_update.id])}">{$v['name']}</a>
+        </div>
+        {/foreach}
+
+    </div>
+</div>
+{include file="default/footer"}

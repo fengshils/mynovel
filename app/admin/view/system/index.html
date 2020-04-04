@@ -1,0 +1,95 @@
+{extend name="base" /}
+
+{block name="content"}
+<div>
+    <span class="layui-breadcrumb">
+  <a href="">首页</a>
+  <a><cite>分类管理</cite></a>
+</span>
+</div>
+<hr>
+<div class="layui-row">
+    <div class="layui-col-md9">
+        <h4><span>章节列表</span></h4>
+    </div>
+    <div class="layui-col-md3">
+        <!--<button class="layui-btn layui-btn-xs" style="text-align: right;" onclick="add()">添加</button>-->
+    </div>
+</div>
+
+<form class="layui-form" >
+    <div class="layui-form-item">
+        <label class="layui-form-label">网站名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="site_title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="摸鱼小说">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">网站状态</label>
+        <div class="layui-input-block">
+            <input type="text" name="site_status" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="开启">
+            <p style="color: red">开启或关闭</p>
+        </div>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">网站描述</label>
+        <div class="layui-input-block">
+            <input type="text" name="site_des" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="摸鱼小说">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">网站SEO</label>
+        <div class="layui-input-block">
+            <input type="text" name="site_seo" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="摸鱼小说">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">小说章节存储</label>
+        <div class="layui-input-block">
+            <input type="text" name="site_save_type" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="mysql">
+            <p style="color: red">mysql或者text</p>
+
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">手机端模板</label>
+        <div class="layui-input-block">
+            <input type="text" name="site_m_templte" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="default">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">pc端模板</label>
+        <div class="layui-input-block">
+            <input type="text" name="site_pc_template" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="default">
+        </div>
+    </div>
+
+</form>
+<div class="layui-form-item">
+    <div class="layui-input-block">
+        <button class="layui-btn" onclick="save()">保存</button>
+    </div>
+</div>
+<script>
+    layui.use(['layer','form'],function(){
+        form = layui.form;
+        layer = layui.layer;
+        $ = layui.jquery;
+    });
+    function save(){
+        $.post('/admin/system',$('form').serialize(),function(res){
+            if(res.code>0){
+                layer.alert(res.msg,{icon:2});
+            }else{
+                layer.msg(res.msg);
+                setTimeout(function(){parent.window.location.reload();},1000);
+            }
+        },'json');
+    }
+
+</script>
+
+
+
+{/block}

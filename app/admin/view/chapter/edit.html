@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/layui/css/layui.css">
+    <script type="text/javascript" src="/static/admin/layui/layui.js"></script>
+</head>
+<body >
+<form class="layui-form" action="" method="post">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">章节名称</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" name="name" value="{$chapter.name}">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">正文</label>
+        <div class="layui-input-block">
+                            <textarea class="layui-textarea" id="content" style="display: none" name="content">
+              {$chapter.content}
+            </textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" >保存</button>
+        </div>
+    </div>
+</form>
+
+
+
+<script type="text/javascript">
+    layui.use(['layer','form'],function(){
+        form = layui.form;
+        layer = layui.layer;
+        $ = layui.jquery;
+    });
+    layui.use('form', function(){
+        var form = layui.form;
+
+    });
+    layui.use('layedit', function(){
+        var layedit = layui.layedit
+            ,$ = layui.jquery;
+        layedit.set({
+            uploadImage: {
+                url: '/admin/index/upload' //接口url
+                ,type: 'post' //默认post
+            }
+        });
+
+        //构建一个默认的编辑器
+        var index = layedit.build('content');
+
+        //编辑器外部操作
+        var active = {
+            content: function(){
+                alert(layedit.getContent(index)); //获取编辑器内容
+            }
+            ,text: function(){
+                alert(layedit.getText(index)); //获取编辑器纯文本内容
+            }
+            ,selection: function(){
+                alert(layedit.getSelection(index));
+            }
+        };
+
+        $('.site-demo-layedit').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+
+
+    });
+
+
+</script>
+
+</body>
+</html>

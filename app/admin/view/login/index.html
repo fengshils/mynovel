@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>摸鱼小说连载系统登录</title>
+  <meta name="description" content="particles.js is a lightweight JavaScript library for creating particles.">
+  <meta name="author" content="Vincent Garreau" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" media="screen" href="/static/admin/login/css/style.css">
+  <link rel="stylesheet" type="text/css" href="/static/admin/login/css/reset.css"/>
+
+</head>
+<body>
+
+<div id="particles-js">
+		<div class="login">
+			<div class="login-top">
+				登录
+			</div>
+			<form action="/admin/login/" method="post">
+				<div class="login-center clearfix">
+					<div class="login-center-img"><img src="/static/admin/login/img/name.png"/></div>
+					<div class="login-center-input">
+						<input type="text" name="username" value="" placeholder="请输入您的用户名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的用户名'"/>
+						<div class="login-center-input-text">用户名</div>
+					</div>
+				</div>
+				<div class="login-center clearfix">
+					<div class="login-center-img"><img src="/static/admin/login/img/password.png"/></div>
+					<div class="login-center-input">
+						<input type="password" name="password"value="" placeholder="请输入您的密码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的密码'"/>
+						<div class="login-center-input-text">密码</div>
+					</div>
+				</div>
+				<div class="login-button" onclick="login()">
+					登录
+				</div>
+			</form>
+		</div>
+		<div class="sk-rotating-plane"></div>
+</div>
+
+<!-- scripts -->
+<script src="/static/admin/login/js/particles.min.js"></script>
+<script src="/static/admin/login/js/app.js"></script>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<script>
+	function login(){
+		var username=document.getElementsByName('username')[0].value;
+		var password=document.getElementsByName('password')[0].value;
+		console.log(username, password);
+		$.post("/admin/login",
+				{
+					username: username,
+					password: password
+				},
+				function(data,status){
+					console.log(data);
+					if(data.code ===0 ){
+						alert(data.message)
+						window.location.href = '/admin/index'
+					}else{
+						alert(data.message)
+					}
+				});
+	}
+</script>
+</body>
+</html>

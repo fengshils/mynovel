@@ -1,0 +1,137 @@
+{include file="default/head"}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="card ">
+                <div class="card-header">
+                    首页推荐
+                </div>
+                <div class="row p-2 text-center">
+                    {foreach $recommend1_novel_list as $c}
+                    <div class="col-sm-3 ">
+                        <a href="{:url('Novel/index',['id'=>$c.id])}"><img src="{$c.cover}" alt="{$c.name}" style="width: 120px;height: 160px" onerror="javascript:this.src='/static/images/no_img.jpg';"></a>
+                        <div>
+                            <span><strong>{$c.name}</strong></span>
+                            <p><span style="font-size: .8125rem;color: gray; border-top: -2rem;">{$c.author}</span></p>
+                        </div>
+                    </div>
+                    {/foreach}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-header">
+                            日点击榜
+                        </div>
+                        <ul class="list-group" style="line-height:20px">
+                            {foreach $d_top_list as $c}
+                            <li class="list-group-item">
+                                <div class="media position-relative">
+                                    <div class="media-body">
+                                        <a href="{:url('Novel/index',['id'=>$c.id])}"><span class="mt-0"><a href="{:url('Novel/index',['id'=>$c.id])}">{$c.name}</a>&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                        <span style="font-size: .8125rem;color: gray; border-top: -2rem;">{$c.author}</span>
+                                    </div>
+
+                                </div>
+                            </li>
+                            {/foreach}
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+</div>
+
+<div class="container">
+    <div class="row ">
+        <div class="col-sm-8">
+            <div class="card ">
+                <div class="card-header">
+                    经典好书
+                </div>
+                <div class="row p-2 text-center">
+                    {foreach $recommend2_novel_list as $c}
+                    <div class="col-sm-3 ">
+                        <img src="{$c.cover}" alt="{$c.name}" style="width: 120px;height: 160px" onerror="javascript:this.src='/static/images/no_img.jpg';">
+                        <div>
+                            <a href="{:url('Novel/index',['id'=>$c.id])}"><span><strong>{$c.name}</strong></span></a>
+                            <p><span style="font-size: .8125rem;color: gray; border-top: -2rem;">{$c.author}</span></p>
+                        </div>
+                    </div>
+                    {/foreach}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header">
+                    月点击榜
+                </div>
+                <ul class="list-group" style="line-height:20px">
+                    {foreach $m_top_list as $c}
+                    <li class="list-group-item">
+                        <div class="media position-relative">
+                            <div class="media-body">
+                                <a href="{:url('Novel/index',['id'=>$c.id])}"><span class="mt-0"><a href="{:url('Novel/index',['id'=>$c.id])}">{$c.name}</a>&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                <span style="font-size: .8125rem;color: gray; border-top: -2rem;">{$c.author}</span>
+                            </div>
+
+                        </div>
+                    </li>
+                    {/foreach}
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row ">
+        <div class="col-sm-8">
+            <div class="card ">
+                <div class="card-header">
+                    最近更新
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush" style="line-height: 2px">
+
+                        {foreach $last_updates as $v}
+                        <li class="list-group-item ">
+                            <a href="{:url('Novel/index',['id'=>$c.id])}">{$v.name}</a>
+                            <span class="text-right" style="font-size: .8125rem;color: gray; border-top: -2rem;">{$v.author}</span>
+                            <span class="text-right" style="font-size: .8125rem;color: gray; border-top: -2rem;">{$v.update_time | date='Y-m-d H:i'}</span>
+                        </li>
+                        {/foreach}
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header">
+                    总点击榜
+                </div>
+                <ul class="list-group" style="line-height:20px">
+                    {foreach $a_top_list as $c}
+                    <li class="list-group-item">
+                        <div class="media position-relative">
+                            <div class="media-body">
+                                <span class="mt-0"><a href="{:url('Novel/index',['id'=>$c.id])}">{$c.name}</a>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <span style="font-size: .8125rem;color: gray; border-top: -2rem;">{$c.author}</span>
+                            </div>
+
+                        </div>
+                    </li>
+                    {/foreach}
+                </ul>
+            </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{include file="default/footer"}

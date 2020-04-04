@@ -1,0 +1,91 @@
+{extend name="base" /}
+
+{block name="content"}
+<div>
+    <span class="layui-breadcrumb">
+  <a href="">首页</a>
+  <a><cite>用户管理</cite></a>
+</span>
+</div>
+<hr>
+<div class="layui-row">
+    <div class="col-md-9"></div>
+    <div class="col-md-3">
+        <button class="layui-btn layui-btn-sm layui-btn-primary" onclick="add()">添加</button>
+    </div>
+</div>
+<div>
+    <table class="layui-table">
+        <colgroup>
+
+            <col>
+        </colgroup>
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>用户名</th>
+            <th>邮箱</th>
+            <th>手机</th>
+            <th>状态</th>
+            <!--<th>创建时间</th>-->
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {volist name="cats" id="cat"}
+        <tr>
+            <td>{$cat.id}</td>
+            <td>{$cat.username}</td>
+            <td>{$cat.email}</td>
+            <td>{$cat.phone}</td>
+            <td>{if $cat['status']==0}开启{elseif $cat==1}关闭{/if}</td>
+            <!--<td>{$cat.create_time}</td>-->
+            <td><button class="layui-btn-sm layui-btn" onclick="edit({$cat.id})">编辑</button>
+                <button class="layui-btn-sm layui-btn layui-btn-danger"  onclick="del({$cat.id})">删除</button>
+            </td>
+
+
+        </tr>
+        {/volist}
+
+        </tbody>
+    </table>
+    {$cats|raw}
+</div>
+
+<script type="text/javascript">
+    function edit(id){
+        layer.open({
+            type: 2,
+            title: '编辑',
+            shade: 0.3,
+            area: ['480px', '440px'],
+            content: '/admin/front_user/edit?id='+id
+        });
+    }
+    function add(){
+        layer.open({
+            type: 2,
+            title: '添加',
+            shade: 0.3,
+            area: ['480px', '440px'],
+            content: '/admin/front_user/add'
+        });
+    }
+    function del(id){
+        layer.confirm('确定要删除吗？', {
+            icon:3,
+            btn: ['确定','取消']
+        }, function(){
+            $.post('/admin/front_user/del',{'id':id},function(res){
+                if(res.code>0){
+                    layer.alert(res.msg,{icon:2});
+                }else{
+                    layer.msg(res.msg);
+                    setTimeout(function(){window.location.reload();},1000);
+                }
+            },'json');
+        });
+    }
+</script>
+{/block}

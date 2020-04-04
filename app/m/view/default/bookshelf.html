@@ -1,0 +1,76 @@
+    {include file="default/head"}
+    <style type="text/css">
+        li {
+            list-style: none;
+        }
+        .list-img {
+            height: 100px;
+            width: 80px;
+        }
+        .d-list li{
+            border-bottom: 1px solid #dfdfdf;
+        }
+    </style>
+    <div class="container d-list">
+        {if $Request.session.msg}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {$Request.session.msg}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {/if}
+        <div class="row">
+
+          <ul class="list-group">
+            {if $novel_lists}
+            {foreach $novel_lists as $c}
+                <li class="list-group-item">
+                  <div class="media position-relative">
+                      <a href="/m/novel/{$c.detail.id}.html"><img src="{$c.detail.cover}" class="list-img pr-3" alt="..." onerror="javascript:this.src='/static/images/no_img.jpg';"></a>
+                      <div class="media-body">
+                          <a href="/m/novel/{$c.detail.id}.html"><h6 class="mt-0">{$c.detail.name}&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: .8125rem;color: gray; border-top: -2rem;">{$c.detail.author}</span></h6></a>
+                          <p class="badge  text-wrap " >{$c.detail.desc|mb_substr=0,50,'utf-8'}</p>
+                          <div class="text-right"><a href="{:url('del',['id'=>$c.id])}" class="bg-dark" style="border-radius: 20%; color: white; ">删除</a></div>
+                          
+                      </div>
+
+                  </div>
+              </li>
+              {/foreach}
+              {else/}
+                <li class="list-group-item">
+                    哇！暂无书籍，快去读书吧！
+              </li>
+              {/if}
+            }
+        </ul>
+
+
+        </div>
+    </div>
+
+
+        </div>
+      </div>
+    <div>
+        <div class="d-flex bd-highlight shadow-sm p-1 mb-0 bg-white rounded">
+            <div class="p-2 flex-grow-1 bd-highlight">猜你喜欢</div>
+          
+            <!--<div class="p-2 bd-highlight text-black-50" style="font-size: small;">更多</div>-->
+        </div>
+        <div class="d-flex justify-content-around">
+            {foreach $likes as $v}
+            <div class=" p-2 mb-2" >
+                <a href="/m/novel/{$v.id}.html"><img src="{$v.cover}" class="card-img-top" alt="{$v.name}" onerror="javascript:this.src='/static/images/no_img.jpg';"></a>
+                <span style="font-size: .8125rem;">{$v.name |mb_substr=0,8,'utf-8' }</span>
+                <br>
+                <span style="font-size: .8125rem;color: gray; border-top: -2rem;">{$v.author}</span>
+              </div>
+            {/foreach}
+
+        </div>
+    </div>
+
+
+    {include file="default/footer"}

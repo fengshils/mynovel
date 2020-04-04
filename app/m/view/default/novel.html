@@ -1,0 +1,110 @@
+{include file="default/head"}
+<style type="text/css">
+        li {
+            list-style: none;
+        }
+        .list-img {
+            height: auto;
+            width: 100px;
+        }
+        .d-list li{
+            border-bottom: 1px solid #dfdfdf;
+        }
+        .list-group-item{
+            line-height: 0.5rem;
+        }
+    </style>
+    <div>
+        {if $Request.session.msg}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {$Request.session.msg}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {/if}
+        <div class="p-2">
+            <div class="media position-relative">
+              <img src="{$novel.cover}" class="list-img pr-3" alt="{$novel.name}" onerror="javascript:this.src='/static/images/no_img.jpg';">
+              <div class="media-body">
+                <h6 class="mt-0">{$novel.name}&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: .8125rem;color: gray; border-top: -2rem;">{$novel.author}</span></h6>
+                <div>最近更新： {$last_chapter.update_time | date='Y-m-d H:i'}</div>
+                  <div>最新章节： <a href="/m/novel/chapter/{$last_chapter['id']}.html">{$last_chapter.name}</a></div>
+                  <div class="text-left">
+                      <a href="{:url('BookShelf/add',['n_id'=>$novel['id'], 'chapter_id'=>$chapters[0]['id']])}"><button class="btn btn-sm btn-info">添加书架</button></a>
+                      <a href="{:url('novel/chapter',['id'=>$chapters[0]['id']])}"><button class="btn btn-sm btn-danger" >开始阅读</button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+
+    <div>
+        <div class="d-flex bd-highlight">
+            <div class="p-2 flex-grow-1 bd-highlight">简介：</div>
+        </div>
+        <div class="p-2" style="font-size: 0.5rem"><p>
+            {$novel.desc}
+        </p></div>
+    </div>
+            <div>
+        <div class="d-flex bd-highlight shadow-sm p-1 mb-0 bg-white rounded">
+            <div class="p-2 flex-grow-1 bd-highlight">最新章节</div>
+          
+            <!--<div class="p-2 bd-highlight text-black-50" style="font-size: small;">更多</div>-->
+        </div>
+        <div>
+                       <ul class="list-group">
+                           {foreach $last_chapters as $v}
+              <li class="list-group-item"><a href="/m/novel/chapter/{$v['id']}.html">{$v.name}</a></li>
+                {/foreach}
+            </ul>
+        </div>
+      </div>
+    <div>
+        <div >
+            <div class="p-2 flex-grow-1 bd-highlight">章节目录</div>
+            <div>
+              <ul class="list-group">
+                  {foreach $chapters as $v}
+                  <li class="list-group-item"><a href="/m/novel/chapter/{$v['id']}.html">{$v.name}</a></li>
+                  {/foreach}
+            </ul>
+            </div>
+                  <div class="container pt-2">
+        <div class="row">
+                <div class="col" >
+                  <nav aria-label="Page navigation example">
+                      {$chapters|raw}
+      </nav>
+      </div>
+        </div>
+      </div>
+        </div>
+    </div>
+        <div>
+            <div class="d-flex bd-highlight shadow-sm p-1 mb-0 bg-white rounded">
+                <div class="p-2 flex-grow-1 bd-highlight">猜你喜欢</div>
+
+                <!--<div class="p-2 bd-highlight text-black-50" style="font-size: small;">更多</div>-->
+            </div>
+            <div class="d-flex justify-content-around">
+                {foreach $likes as $v}
+                <div class=" p-2 mb-2" >
+                    <a href="/m/novel/{$v.id}.html"><img src="{$v.cover}" class="card-img-top" alt="{$v.name}" onerror="javascript:this.src='/static/images/no_img.jpg';"></a>
+                    <span style="font-size: .8125rem;">{$v.name |mb_substr=0,8,'utf-8' }</span>
+                    <br>
+                    <span style="font-size: .8125rem;color: gray; border-top: -2rem;">{$v.author}</span>
+                </div>
+                {/foreach}
+
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script>
+        function addBookShelf() {
+            $.get("",function(data,status){
+                alert("数据: " + data + "\n状态: " + status);
+            });
+        }
+        </script>
+{include file="default/footer"}
