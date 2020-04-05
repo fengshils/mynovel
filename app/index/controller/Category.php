@@ -31,7 +31,7 @@ class Category extends Common
             return View::fetch($this->sys_set['site_pc_template'].'/category');
         }catch (Exception $e){
             $cat = Db::table('category')->where("id",$id)->find();
-            $cat['lists'] = Db::table('category')->where('f_id',$cat['id'])->select();
+            $cat['lists'] = Db::table('category')->where('f_id',$cat['f_id'])->select();
             $d_top_list = Db::table("novel")->where("status",0)->order("d_hits")->limit(10)->select();
 //            $recommend1_novel_list = Db::table("novel")->where("status",0)->order("d_hits")->limit(10)->select();
             $arr = [];
