@@ -34,11 +34,8 @@ class Category extends Common
             $cat['lists'] = Db::table('category')->where('f_id',$cat['f_id'])->select();
             $d_top_list = Db::table("novel")->where("status",0)->order("d_hits")->limit(10)->select();
 //            $recommend1_novel_list = Db::table("novel")->where("status",0)->order("d_hits")->limit(10)->select();
-            $arr = [];
-            foreach ($cat['lists'] as $v){
-                array_push($arr, $v['id']);
-            }
-            $novel_list = Db::table("novel")->whereIn("c_id",$arr)->paginate(20 );
+
+            $novel_list = Db::table("novel")->whereIn("c_id",$id)->paginate(30 );
 
             View::assign([
                 "cat"=> $cat,
