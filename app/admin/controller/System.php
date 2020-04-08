@@ -6,7 +6,7 @@ namespace app\admin\controller;
 use function PHPSTORM_META\type;
 use think\facade\Db;
 use think\facade\View;
-use think\Facade\Request;
+use think\facade\Request;
 
 use app\admin\model\System as SystemModel;
 

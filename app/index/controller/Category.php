@@ -31,11 +31,14 @@ class Category extends Common
             return View::fetch($this->sys_set['site_pc_template'].'/category');
         }catch (Exception $e){
             $cat = Db::table('category')->where("id",$id)->find();
-            $cat['lists'] = Db::table('category')->where('f_id',$cat['f_id'])->select();
+            $cat['lists'] = Db::table('category')->where('f_id',$cat['id'])->select();
             $d_top_list = Db::table("novel")->where("status",0)->order("d_hits")->limit(10)->select();
 //            $recommend1_novel_list = Db::table("novel")->where("status",0)->order("d_hits")->limit(10)->select();
-
-            $novel_list = Db::table("novel")->whereIn("c_id",$id)->paginate(30 );
+            $arr = array();
+            for($i=0;$i<count($cat['lists']);$i++){
+                array_unshift($arr,$cat['lists'][$i]['id']);
+                };
+            $novel_list = Db::table("novel")->whereIn("c_id",$arr)->paginate(30 );
 
             View::assign([
                 "cat"=> $cat,
